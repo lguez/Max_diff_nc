@@ -30,12 +30,12 @@ program max_diff_nc
   double precision, allocatable:: v1_dble_3d(:, :, :), v2_dble_3d(:, :, :)
   double precision, allocatable:: v1_dble_4d(:, :, :, :), v2_dble_4d(:, :, :, :)
 
-  character(len=nf90_max_name) name1
+  character(len = nf90_max_name) name1
   logical same_varid ! compare variables with same varid
   logical report_id ! report identical variables
   logical comp_mag ! compute avergage order of magnitude
   logical quiet
-  character(len=30+nf90_max_name), allocatable:: tag(:)
+  character(len = 30+nf90_max_name), allocatable:: tag(:)
   integer i
   character(len = :), allocatable:: filename
 
@@ -56,7 +56,7 @@ program max_diff_nc
   ! "tag(:nvar_comp)":
   if (name1 == "") then
      ! We want to compare all the variables
-     call nf95_inquire(ncid1, nvariables=nvariables)
+     call nf95_inquire(ncid1, nvariables = nvariables)
      print *, "Found ", nvariables, " variable(s) in the first file."
      allocate(varid1(nvariables), varid2(nvariables), tag(nvariables))
      
@@ -96,7 +96,7 @@ program max_diff_nc
   end if
 
   do i = 1, nvar_comp
-     call nf95_inquire_variable(ncid1, varid1(i), xtype=xtype1, ndims=ndims)
+     call nf95_inquire_variable(ncid1, varid1(i), xtype = xtype1, ndims = ndims)
      if (ndims == 0 .or. ndims >= 5) then
         print *
         print *, "******************"
