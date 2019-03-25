@@ -8,7 +8,7 @@ program max_diff_nc
   ! statements do not have prompts.
 
   use netcdf95, only: nf95_close, nf95_gw_var, nf95_inq_varid, nf95_inquire, &
-       nf95_inquire_variable, nf95_open
+       nf95_inquire_variable, nf95_open, nf95_get_missing
   use netcdf, only: nf90_noerr, nf90_nowrite, nf90_max_name, NF90_FLOAT, &
        NF90_double
   use jumble, only: compare, get_command_arg_dyn
@@ -30,6 +30,11 @@ program max_diff_nc
   double precision, allocatable:: v1_dble_3d(:, :, :), v2_dble_3d(:, :, :)
   double precision, allocatable:: v1_dble_4d(:, :, :, :), v2_dble_4d(:, :, :, :)
 
+  logical, allocatable:: valid1_1d(:), valid2_1d(:)
+  logical, allocatable:: valid1_2d(:, :), valid2_2d(:, :)
+  logical, allocatable:: valid1_3d(:, :, :), valid2_3d(:, :, :)
+  logical, allocatable:: valid1_4d(:, :, :, :), valid2_4d(:, :, :, :)
+
   character(len = nf90_max_name) name1
   logical same_varid ! compare variables with same varid
   logical report_id ! report identical variables
@@ -38,6 +43,8 @@ program max_diff_nc
   character(len = 30+nf90_max_name), allocatable:: tag(:)
   integer i
   character(len = :), allocatable:: filename
+  real miss1, miss2
+  double precision miss1_dble, miss2_dble
 
   !----------------------
 
@@ -59,7 +66,7 @@ program max_diff_nc
      call nf95_inquire(ncid1, nvariables = nvariables)
      print *, "Found ", nvariables, " variable(s) in the first file."
      allocate(varid1(nvariables), varid2(nvariables), tag(nvariables))
-     
+
      if (same_varid) then
         nvar_comp = nvariables
         varid1 = [(i, i = 1, nvariables)]
@@ -71,7 +78,7 @@ program max_diff_nc
         end do
      else
         nvar_comp = 0
-        
+
         do i = 1, nvariables
            call nf95_inquire_variable(ncid1, i, name1)
            call nf95_inq_varid(ncid2, trim(name1), varid2(nvar_comp + 1), &
@@ -105,50 +112,120 @@ program max_diff_nc
         print *, "ndims = ", ndims
      else
         if (xtype1 == nf90_float) then
+           call nf95_get_missing(ncid1, varid1(i), miss1)
+           call nf95_get_missing(ncid2, varid2(i), miss2)
+           
            select case (ndims)
            case (1)
               call nf95_gw_var(ncid1, varid1(i), v1_1d)
               call nf95_gw_var(ncid2, varid2(i), v2_1d)
+              valid1_1d = v1_1d /= miss1
+              valid2_1d = v2_1d /= miss2
+
+              if (any(valid1_1d .neqv. valid2_1d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_1d = valid1_1d .and. valid2_1d
+              end if
+              
               call compare(v1_1d, v2_1d, trim(tag(i)), comp_mag, report_id, &
-                   quiet)
+                   quiet, valid = valid1_1d)
            case (2)
               call nf95_gw_var(ncid1, varid1(i), v1_2d)
               call nf95_gw_var(ncid2, varid2(i), v2_2d)
+              valid1_2d = v1_2d /= miss1
+              valid2_2d = v2_2d /= miss2
+
+              if (any(valid1_2d .neqv. valid2_2d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_2d = valid1_2d .and. valid2_2d
+              end if
+              
               call compare(v1_2d, v2_2d, trim(tag(i)), comp_mag, report_id, &
-                   quiet)
+                   quiet, valid = valid1_2d)
            case (3)
               call nf95_gw_var(ncid1, varid1(i), v1_3d)
               call nf95_gw_var(ncid2, varid2(i), v2_3d)
+              valid1_3d = v1_3d /= miss1
+              valid2_3d = v2_3d /= miss2
+
+              if (any(valid1_3d .neqv. valid2_3d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_3d = valid1_3d .and. valid2_3d
+              end if
+              
               call compare(v1_3d, v2_3d, trim(tag(i)), comp_mag, report_id, &
-                   quiet)
+                   quiet, valid = valid1_3d)
            case (4)
               call nf95_gw_var(ncid1, varid1(i), v1_4d)
               call nf95_gw_var(ncid2, varid2(i), v2_4d)
+              valid1_4d = v1_4d /= miss1
+              valid2_4d = v2_4d /= miss2
+
+              if (any(valid1_4d .neqv. valid2_4d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_4d = valid1_4d .and. valid2_4d
+              end if
+              
               call compare(v1_4d, v2_4d, trim(tag(i)), comp_mag, report_id, &
-                   quiet)
+                   quiet, valid = valid1_4d)
            end select
         else if (xtype1 == nf90_double) then
+           call nf95_get_missing(ncid1, varid1(i), miss1_dble)
+           call nf95_get_missing(ncid2, varid2(i), miss2_dble)
+           
            select case (ndims)
            case (1)
               call nf95_gw_var(ncid1, varid1(i), v1_dble_1d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_1d)
+              valid1_1d = v1_dble_1d /= miss1_dble
+              valid2_1d = v2_dble_1d /= miss2_dble
+
+              if (any(valid1_1d .neqv. valid2_1d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_1d = valid1_1d .and. valid2_1d
+              end if
+              
               call compare(v1_dble_1d, v2_dble_1d, trim(tag(i)), comp_mag, &
-                   report_id, quiet)
+                   report_id, quiet, valid = valid1_1d)
            case (2)
               call nf95_gw_var(ncid1, varid1(i), v1_dble_2d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_2d)
+              valid1_2d = v1_dble_2d /= miss1_dble
+              valid2_2d = v2_dble_2d /= miss2_dble
+
+              if (any(valid1_2d .neqv. valid2_2d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_2d = valid1_2d .and. valid2_2d
+              end if
+              
               call compare(v1_dble_2d, v2_dble_2d, trim(tag(i)), comp_mag, &
-                   report_id, quiet)
+                   report_id, quiet, valid = valid1_2d)
            case (3)
               call nf95_gw_var(ncid1, varid1(i), v1_dble_3d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_3d)
+              valid1_3d = v1_dble_3d /= miss1_dble
+              valid2_3d = v2_dble_3d /= miss2_dble
+
+              if (any(valid1_3d .neqv. valid2_3d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_3d = valid1_3d .and. valid2_3d
+              end if
+              
               call compare(v1_dble_3d, v2_dble_3d, trim(tag(i)), comp_mag, &
-                   report_id, quiet)
+                   report_id, quiet, valid = valid1_3d)
            case (4)
               call nf95_gw_var(ncid1, varid1(i), v1_dble_4d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_4d)
+              valid1_4d = v1_dble_4d /= miss1_dble
+              valid2_4d = v2_dble_4d /= miss2_dble
+
+              if (any(valid1_4d .neqv. valid2_4d)) then
+                 print *, "Domains of definition are not identical."
+                 valid1_4d = valid1_4d .and. valid2_4d
+              end if
+              
               call compare(v1_dble_4d, v2_dble_4d, trim(tag(i)), comp_mag, &
-                   report_id, quiet)
+                   report_id, quiet, valid = valid1_4d)
            end select
         else
            print *
