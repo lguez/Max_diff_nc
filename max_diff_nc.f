@@ -59,20 +59,24 @@ program max_diff_nc
      call nf95_inquire(ncid1, nvariables=nvariables)
      print *, "Found ", nvariables, " variable(s) in the first file."
      allocate(varid1(nvariables), varid2(nvariables), tag(nvariables))
+     
      if (same_varid) then
         nvar_comp = nvariables
-        varid1 = (/(i, i = 1, nvariables)/)
+        varid1 = [(i, i = 1, nvariables)]
         varid2 = varid1
+
         do i = 1, nvariables
            call nf95_inquire_variable(ncid1, varid1(i), name1)
            tag(i) = 'Variable "' // trim(name1) // '" (name in the first file)'
         end do
      else
         nvar_comp = 0
+        
         do i = 1, nvariables
            call nf95_inquire_variable(ncid1, i, name1)
            call nf95_inq_varid(ncid2, trim(name1), varid2(nvar_comp + 1), &
                 ncerr)
+
            if (ncerr == nf90_noerr) then
               varid1(nvar_comp + 1) = i
               tag(nvar_comp + 1) = 'Variable "' // trim(name1) // '"'

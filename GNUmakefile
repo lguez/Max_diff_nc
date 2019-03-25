@@ -1,21 +1,19 @@
 # This is a makefile for GNU make.
 
-# 1. Compiler-dependent part
+netcdf95_dir = ${HOME}/Compil_prod/NetCDF95_${FC}_debug
+jumble_dir = ${HOME}/Compil_prod/Jumble_${FC}_debug
+nr_util_dir = ${HOME}/Compil_prod/NR_util_${FC}_debug
 
-netcdf95_dir = 
-jumble_dir = 
-nr_util_dir =
-netcdf_dir = 
+include ${general_compiler_options_dir}/settings.mk
 
-FFLAGS = -I${jumble_dir} -I${netcdf_dir}/include -I${netcdf95_dir} -O2 -free
+# 1. Executable file and libraries
 
-LDLIBS = -L${jumble_dir} -L${netcdf_dir}/lib -L${netcdf95_dir} -L${nr_util_dir} -lnetcdf95 -ljumble -lnetcdff -lnr_util
+execut = max_diff_nc
+lib_list = netcdf95 jumble netcdff nr_util
 
 # 2. Rules
 
-.PHONY: all clean
-execut = max_diff_nc
-all: ${execut}
+all: ${execut} log
 
 clean:
-	-rm ${execut}
+	-rm ${execut} log
