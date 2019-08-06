@@ -102,21 +102,22 @@ program max_diff_nc
      tag(1) = 'Variable "' // trim(name1) // '"'
   end if
 
-  do i = 1, nvar_comp
+  loop_var: do i = 1, nvar_comp
      call nf95_inquire_variable(ncid1, varid1(i), xtype = xtype1, ndims = ndims)
-     if (ndims == 0 .or. ndims >= 5) then
+
+     test_dim: if (ndims == 0 .or. ndims >= 5) then
         print *
         print *, "******************"
         print *, trim(tag(i)) // ":"
         print *, "Rank not supported."
         print *, "ndims = ", ndims
-     else
-        if (xtype1 == nf90_float) then
+     else test_dim
+        test_type: if (xtype1 == nf90_float) then
            call nf95_get_missing(ncid1, varid1(i), miss1)
            call nf95_get_missing(ncid2, varid2(i), miss2)
-           
-           select case (ndims)
-           case (1)
+
+           float_select_ndims: select case (ndims)
+           case (1) float_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_1d)
               call nf95_gw_var(ncid2, varid2(i), v2_1d)
               valid1_1d = v1_1d /= miss1
@@ -126,10 +127,12 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_1d = valid1_1d .and. valid2_1d
               end if
-              
+
+              deallocate(valid2_1d)
               call compare(v1_1d, v2_1d, trim(tag(i)), comp_mag, report_id, &
                    quiet, valid = valid1_1d)
-           case (2)
+              deallocate(v1_1d, v2_1d, valid1_1d)
+           case (2) float_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_2d)
               call nf95_gw_var(ncid2, varid2(i), v2_2d)
               valid1_2d = v1_2d /= miss1
@@ -139,10 +142,12 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_2d = valid1_2d .and. valid2_2d
               end if
-              
+
+              deallocate(valid2_2d)
               call compare(v1_2d, v2_2d, trim(tag(i)), comp_mag, report_id, &
                    quiet, valid = valid1_2d)
-           case (3)
+              deallocate(v1_2d, v2_2d, valid1_2d)
+           case (3) float_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_3d)
               call nf95_gw_var(ncid2, varid2(i), v2_3d)
               valid1_3d = v1_3d /= miss1
@@ -152,10 +157,12 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_3d = valid1_3d .and. valid2_3d
               end if
-              
+
+              deallocate(valid2_3d)
               call compare(v1_3d, v2_3d, trim(tag(i)), comp_mag, report_id, &
                    quiet, valid = valid1_3d)
-           case (4)
+              deallocate(v1_3d, v2_3d, valid1_3d)
+           case (4) float_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_4d)
               call nf95_gw_var(ncid2, varid2(i), v2_4d)
               valid1_4d = v1_4d /= miss1
@@ -165,16 +172,18 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_4d = valid1_4d .and. valid2_4d
               end if
-              
+
+              deallocate(valid2_4d)
               call compare(v1_4d, v2_4d, trim(tag(i)), comp_mag, report_id, &
                    quiet, valid = valid1_4d)
-           end select
-        else if (xtype1 == nf90_double) then
+              deallocate(v1_4d, v2_4d, valid1_4d)
+           end select float_select_ndims
+        else if (xtype1 == nf90_double) then test_type
            call nf95_get_missing(ncid1, varid1(i), miss1_dble)
            call nf95_get_missing(ncid2, varid2(i), miss2_dble)
-           
-           select case (ndims)
-           case (1)
+
+           double_select_ndims: select case (ndims)
+           case (1) double_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_dble_1d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_1d)
               valid1_1d = v1_dble_1d /= miss1_dble
@@ -184,10 +193,12 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_1d = valid1_1d .and. valid2_1d
               end if
-              
+
+              deallocate(valid2_1d)
               call compare(v1_dble_1d, v2_dble_1d, trim(tag(i)), comp_mag, &
                    report_id, quiet, valid = valid1_1d)
-           case (2)
+              deallocate(v1_dble_1d, v2_dble_1d, valid1_1d)
+           case (2) double_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_dble_2d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_2d)
               valid1_2d = v1_dble_2d /= miss1_dble
@@ -197,10 +208,12 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_2d = valid1_2d .and. valid2_2d
               end if
-              
+
+              deallocate(valid2_2d)
               call compare(v1_dble_2d, v2_dble_2d, trim(tag(i)), comp_mag, &
                    report_id, quiet, valid = valid1_2d)
-           case (3)
+              deallocate(v1_dble_2d, v2_dble_2d, valid1_2d)
+           case (3) double_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_dble_3d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_3d)
               valid1_3d = v1_dble_3d /= miss1_dble
@@ -210,10 +223,12 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_3d = valid1_3d .and. valid2_3d
               end if
-              
+
+              deallocate(valid2_3d)
               call compare(v1_dble_3d, v2_dble_3d, trim(tag(i)), comp_mag, &
                    report_id, quiet, valid = valid1_3d)
-           case (4)
+              deallocate(v1_dble_3d, v2_dble_3d, valid1_3d)
+           case (4) double_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_dble_4d)
               call nf95_gw_var(ncid2, varid2(i), v2_dble_4d)
               valid1_4d = v1_dble_4d /= miss1_dble
@@ -223,18 +238,20 @@ program max_diff_nc
                  print *, "Domains of definition are not identical."
                  valid1_4d = valid1_4d .and. valid2_4d
               end if
-              
+
+              deallocate(valid2_4d)
               call compare(v1_dble_4d, v2_dble_4d, trim(tag(i)), comp_mag, &
                    report_id, quiet, valid = valid1_4d)
-           end select
-        else
+              deallocate(v1_dble_4d, v2_dble_4d, valid1_4d)
+           end select double_select_ndims
+        else test_type
            print *
            print *, "******************"
            print *, trim(tag(i)) // ":"
            print *, 'Not of type "nf90_float or "nf90_double".'
-        end if
-     end if
-  end do
+        end if test_type
+     end if test_dim
+  end do loop_var
 
   call nf95_close(ncid1)
   call nf95_close(ncid2)
