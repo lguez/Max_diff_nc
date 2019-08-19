@@ -1,4 +1,5 @@
-# Ml2pl
-Interpolation from model levels to pressure levels.
+# `Max_diff_nc`
 
-See [Ml2pl page](http://lmdz.lmd.jussieu.fr/utilisateurs/outils/utilisation-de-lmdz#section-9).
+Compares two NetCDF files
+
+See [`Max_diff_nc` page](http://www.lmd.jussieu.fr/~lguez/max_diff_nc.html).
