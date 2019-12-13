@@ -1,4 +1,5 @@
-# This is a template. Fill in the path to the executable.
+# This is a template. Fill in the path to the executable and set up
+# the environment with module.
 
 # This is a script in Bash.
 # Author: Lionel GUEZ
@@ -52,9 +53,6 @@ if (($# != 2))
     exit 1
 fi
 
-##set -x
-trap 'exit 1' ERR
-
 for argument in $*
   do
   if [[ ! -f $argument ]]
@@ -65,13 +63,18 @@ for argument in $*
 done
 
 max_diff_nc=/.../max_diff_nc
+
 if [[ ! -f $max_diff_nc || ! -x $max_diff_nc ]]
     then
     echo "Fortran executable not found" >&2
     exit 1
 fi
 
-set -e
+# No set -e because module purge could fail
+
+# Set up the necessary environment:
+module purge >/dev/null
+module load ... >/dev/null
 
 # Run the Fortran program:
 $max_diff_nc $* <<EOF
