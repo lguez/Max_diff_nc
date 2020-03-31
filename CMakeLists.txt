@@ -30,3 +30,13 @@ find_library(netcdff_LIBRARY netcdff)
 add_executable(max_diff_nc max_diff_nc.f90)
 target_include_directories(max_diff_nc PRIVATE ${netcdff_INCLUDE_DIR})
 target_link_libraries(max_diff_nc netcdf95 ${netcdff_LIBRARY} jumble)
+
+include(GNUInstallDirs)
+
+install(TARGETS max_diff_nc DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}
+  COMPONENT runtime)
+
+configure_file(max_diff_nc_in.sh max_diff_nc.sh @ONLY)
+
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/max_diff_nc.sh TYPE BIN
+  COMPONENT runtime)

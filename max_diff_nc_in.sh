@@ -1,6 +1,3 @@
-# This is a template. Fill in the path to the executable and set up
-# the environment with module.
-
 # This is a script in Bash.
 # Author: Lionel GUEZ
 
@@ -13,6 +10,9 @@
 # selected on the command line. Compared variables are assumed to have
 # the same type. The program checks that compared variables have the
 # same shape.
+
+# It may be necessary to set up the environment with module (see at
+# the end of the script).
 
 # See notes.
 
@@ -62,7 +62,7 @@ for argument in $*
   fi
 done
 
-max_diff_nc=/.../max_diff_nc
+max_diff_nc=@CMAKE_INSTALL_FULL_LIBEXECDIR@/max_diff_nc
 
 if [[ ! -f $max_diff_nc || ! -x $max_diff_nc ]]
     then
@@ -73,8 +73,8 @@ fi
 # No set -e because module purge could fail
 
 # Set up the necessary environment:
-module purge >/dev/null
-module load ... >/dev/null
+##module purge >/dev/null
+##module load ... >/dev/null
 
 # Run the Fortran program:
 $max_diff_nc $* <<EOF
