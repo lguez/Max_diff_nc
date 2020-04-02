@@ -5,6 +5,23 @@ set(FETCH OFF CACHE BOOL "Download")
 if(FETCH)
   include(FetchContent)
   
+  function(MakeAvailable)
+    # The only difference with FetchContent_MakeAvailable is the
+    # option EXCLUDE_FROM_ALL.
+    
+    foreach(NAME IN LISTS ARGN)
+      FetchContent_GetProperties(${NAME})
+      string(TOLOWER ${NAME} lcName)
+      
+      if(NOT ${lcName}_POPULATED)
+	FetchContent_Populate(${NAME})
+
+	add_subdirectory(${${lcName}_SOURCE_DIR} ${${lcName}_BINARY_DIR}
+	  EXCLUDE_FROM_ALL)
+      endif()
+    endforeach()
+  endfunction()
+
   FetchContent_Declare(NR_util GIT_REPOSITORY
     https://github.com/lguez/NR_util.git)
 
@@ -14,7 +31,7 @@ if(FETCH)
   FetchContent_Declare(NetCDF95 GIT_REPOSITORY
     https://github.com/lguez/NetCDF95.git)
 
-  FetchContent_MakeAvailable(NR_util Jumble NetCDF95)
+  MakeAvailable(NR_util Jumble NetCDF95)
 else()
   find_package(NR_util REQUIRED CONFIG)
   find_package(Jumble CONFIG REQUIRED)
@@ -32,11 +49,6 @@ target_include_directories(max_diff_nc PRIVATE ${netcdff_INCLUDE_DIR})
 target_link_libraries(max_diff_nc netcdf95 ${netcdff_LIBRARY} jumble)
 
 include(GNUInstallDirs)
-
-install(TARGETS max_diff_nc DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}
-  COMPONENT runtime)
-
+install(TARGETS max_diff_nc DESTINATION ${CMAKE_INSTALL_LIBEXECDIR})
 configure_file(max_diff_nc_in.sh max_diff_nc.sh @ONLY)
-
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/max_diff_nc.sh TYPE BIN
-  COMPONENT runtime)
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/max_diff_nc.sh TYPE BIN)
