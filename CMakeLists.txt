@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 project(Max_diff_nc Fortran)
-set(FETCH OFF CACHE BOOL "Download")
+option(FETCH "Download" OFF)
 
 if(FETCH)
   include(FetchContent)
