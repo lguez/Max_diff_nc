@@ -73,8 +73,8 @@ fi
 # No set -e because module purge could fail
 
 # Set up the necessary environment:
-##module purge >/dev/null
-##module load ... >/dev/null
+##module purge --silent
+##module load --silent ...
 
 # Run the Fortran program:
 $max_diff_nc $* <<EOF
