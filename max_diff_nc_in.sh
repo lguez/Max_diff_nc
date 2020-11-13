@@ -53,6 +53,13 @@ if (($# != 2))
     exit 1
 fi
 
+if [[ -d $2 ]]
+then
+    # Assume that basename is the same:
+    my_file=`basename $1`
+    set $1 $2/$my_file
+fi
+
 for argument in $*
   do
   if [[ ! -f $argument ]]
