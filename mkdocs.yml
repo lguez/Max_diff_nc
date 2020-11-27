@@ -1,0 +1,24 @@
+site_name: Max_diff_nc documentation
+site_url: https://www.lmd.jussieu.fr/~lguez/Max_diff_nc_site/index.html
+repo_url: https://github.com/lguez/Max_diff_nc
+site_author: Lionel GUEZ
+nav:
+   - 'Home':
+      - 'index.md'
+      - 'other_utils.md'
+      - 'installation.md'
+   - 'Usage':
+      - 'usage.md'
+      - 'example_1.md'
+      - 'example_2.md'
+   - 'Notes':
+      - 'French_centers.md'
+      - 'main_memory.md'
+      - 'changes.md'
+      - 'bug_gfortran.md'
+extra_javascript:
+   - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
+markdown_extensions:
+   - smarty
+   - mdx_math
+theme: readthedocs
