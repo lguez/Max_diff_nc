@@ -2,4 +2,4 @@
 
 Compares two NetCDF files
 
-See [`Max_diff_nc` page](http://www.lmd.jussieu.fr/~lguez/max_diff_nc.html).
+See [`Max_diff_nc` page](http://www.lmd.jussieu.fr/~lguez/Max_diff_nc_site).
