@@ -41,9 +41,7 @@ endif()
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
 include(ConfigureCompilerFlags)
 find_package(NetCDF REQUIRED)
-include(FindPkgConfig)
-pkg_check_modules(netcdf-fortran REQUIRED IMPORTED_TARGET netcdf-fortran)
-
+find_package(NetCDF_Fortran REQUIRED)
 add_executable(max_diff_nc max_diff_nc.f90)
 target_link_libraries(max_diff_nc PRIVATE netcdf95 jumble)
 
