@@ -43,7 +43,7 @@ include(ConfigureCompilerFlags)
 find_package(NetCDF REQUIRED)
 find_package(NetCDF_Fortran REQUIRED)
 add_executable(max_diff_nc max_diff_nc.f90)
-target_link_libraries(max_diff_nc PRIVATE netcdf95 jumble)
+target_link_libraries(max_diff_nc PRIVATE NetCDF95::netcdf95 jumble)
 
 include(GNUInstallDirs)
 install(TARGETS max_diff_nc DESTINATION ${CMAKE_INSTALL_LIBEXECDIR})
