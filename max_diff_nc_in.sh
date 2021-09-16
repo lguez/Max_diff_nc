@@ -16,7 +16,7 @@
 
 # See notes.
 
-USAGE="usage: `basename $0` [-s] [-m] [-i] [-q] [-v <var>] file file
+USAGE="usage: `basename $0` [-s] [-m] [-i] [-q] [-v <var>] file file-or-directory
    -s: report identical variables
    -m: compute average order of magnitude
    -i: compare variables with same varid, regardless of variable name
@@ -24,7 +24,7 @@ USAGE="usage: `basename $0` [-s] [-m] [-i] [-q] [-v <var>] file file
    -v <var>: only compare variable <var>
 
 For further documentation, see:
-http://www.lmd.jussieu.fr/~lguez/Max_diff_nc/index.html"
+https://www.lmd.jussieu.fr/~lguez/Max_diff_nc_site/index.html"
 
 # Default values:
 report_id=False

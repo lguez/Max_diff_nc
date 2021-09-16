@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(Max_diff_nc Fortran)
+project(Max_diff_nc LANGUAGES Fortran)
 option(FETCH "Download" OFF)
 
 if(FETCH)

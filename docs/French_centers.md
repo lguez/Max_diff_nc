@@ -13,4 +13,4 @@ Note for the users of French supercomputing centers
 
 -   on the machine jean-zay of IDRIS computing center at:
 
-        /gpfswork/rech/dzt/rdzt899/bin/max_diff_nc.sh
+        /gpfswork/rech/lmd/rdzt899/bin/max_diff_nc.sh

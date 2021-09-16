@@ -1,8 +1,9 @@
 Changes before version control
 ==============================
 
-(See [Github page](https://github.com/lguez/Max_diff_nc) for more recent
-changes.)
+(See [Github
+page](https://github.com/lguez/Max_diff_nc/commits/master) for more
+recent changes.)
 
 -   April 8th, 2014. `max_diff_nc` now reads NetCDF float variables into
     real Fortran variables and NetCDF double variables into double
