@@ -39,7 +39,6 @@ else()
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
-include(ConfigureCompilerFlags)
 find_package(NetCDF REQUIRED)
 find_package(NetCDF_Fortran REQUIRED)
 add_executable(max_diff_nc max_diff_nc.f90)
