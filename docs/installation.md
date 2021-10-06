@@ -27,12 +27,12 @@ same Fortran compiler than used for NetCDF-Fortran.
     Github](https://github.com/lguez/Max_diff_nc). The directory you
     get could be called max\_diff\_nc or max\_diff\_nc-master
     (depending on whether you cloned or downloaded a ZIP file).
+
 2.  Type:
 
         cd the-directory-you-just-downloaded
         mkdir build
         cd build
-            
 
 3.  Choose the installation directory `CMAKE_INSTALL_PREFIX` and type
     the command below with your choice after `-DCMAKE_INSTALL_PREFIX=`
@@ -44,12 +44,10 @@ same Fortran compiler than used for NetCDF-Fortran.
     variable.
 
         cmake .. -DCMAKE_BUILD_TYPE=Release -DFETCH=ON -DCMAKE_INSTALL_PREFIX=/wherever
-            
 
 4.  Type:
 
         make install
-            
 
 Note that the installation process also installs a Fortran executable
 file, `max_diff_nc`, in `$CMAKE_INSTALL_PREFIX/libexec`. Do not remove
