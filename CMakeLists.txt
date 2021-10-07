@@ -37,11 +37,11 @@ else()
   find_package(NR_util REQUIRED CONFIG)
   find_package(Jumble CONFIG REQUIRED)
   find_package(NetCDF95 REQUIRED CONFIG)
+  set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+  find_package(NetCDF REQUIRED)
+  find_package(NetCDF_Fortran REQUIRED)
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
-find_package(NetCDF REQUIRED)
-find_package(NetCDF_Fortran REQUIRED)
 add_executable(max_diff_nc max_diff_nc.f90)
 
 target_link_libraries(max_diff_nc PRIVATE NetCDF95::netcdf95
