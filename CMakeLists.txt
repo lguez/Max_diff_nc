@@ -34,11 +34,9 @@ if(FETCH)
 
   MakeAvailable(NR_util Jumble NetCDF95)
 else()
-  find_package(NR_util REQUIRED CONFIG)
   find_package(Jumble CONFIG REQUIRED)
   find_package(NetCDF95 REQUIRED CONFIG)
   set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
-  find_package(NetCDF REQUIRED)
   find_package(NetCDF_Fortran REQUIRED)
 endif()
 
