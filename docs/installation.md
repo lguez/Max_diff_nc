@@ -84,12 +84,12 @@ same Fortran compiler than used for the four Fortran libraries.
 
 3.  In GNUmakefile, locate the line defining the variable FFLAGS:
 
-        FFLAGS = -O2 -I...
+        FFLAGS = -O2 -I${HOME}/.local/include
 
-    Replace the ellipsis by the path to the compiled NetCDF-Fortran,
-    NetCDF95 and Jumble module interfaces (usually `netcdf.mod`,
-    `netcdf95.mod` and `jumble.mod`). If there are several paths, type
-    each path after `-I`:
+    If `${HOME}/.local/include` is not the path to the compiled
+    NetCDF-Fortran, NetCDF95 and Jumble module interfaces (usually
+    `netcdf.mod`, `netcdf95.mod` and `jumble.mod`), replace it. If
+    there are several paths, type each path after `-I`:
 
         -Ipath1 -Ipath2 -Ipath3
 
@@ -97,13 +97,13 @@ same Fortran compiler than used for the four Fortran libraries.
 
 4.  In GNUmakefile, locate the line defining the variable LDLIBS:
 
-        LDLIBS = -L... -ljumble -lnr_util -lnetcdf95 -lnetcdff -lnetcdf
+        LDLIBS = -L${HOME}/.local/lib -ljumble -lnr_util -lnetcdf95 -lnetcdff -lnetcdf
 
-    Replace the ellipsis by the path to the NetCDF-C, NetCDF-Fortran,
-    NetCDF95, `NR_util` and Jumble libraries (NetCDF-Fortran depends on
-    NetCDF-C and Jumble depends on `NR_util`), if they are not in
-    standard locations. If there are several paths, type each path after
-    `-L`:
+    If `${HOME}/.local/lib` is not the path to the NetCDF-C,
+    NetCDF-Fortran, NetCDF95, `NR_util` and Jumble libraries
+    (NetCDF-Fortran depends on NetCDF-C and Jumble depends on
+    `NR_util`) and they are not in standard locations, replace the
+    path. If there are several paths, type each path after `-L`:
 
         -Lpath1 -Lpath2 -Lpath3
 
@@ -130,11 +130,10 @@ same Fortran compiler than used for the four Fortran libraries.
     convenient because you will not run `max_diff_nc` directly.
 7.  In the script `max_diff_nc.sh`, locate the line:
 
-        max_diff_nc=...
-            
+		max_diff_nc=@CMAKE_INSTALL_FULL_LIBEXECDIR@/max_diff_nc
 
-    Replace the ellipsis by the *absolute* path to the executable binary
-    file `max_diff_nc`. For example:
+    Replace `@CMAKE_INSTALL_FULL_LIBEXECDIR@` by the *absolute* path
+    to the executable binary file `max_diff_nc`. For example:
 
         max_diff_nc=~/.local/libexec/max_diff_nc
             
