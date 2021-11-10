@@ -6,23 +6,6 @@ option(FETCH "Download")
 if(FETCH)
   include(FetchContent)
   
-  function(MakeAvailable)
-    # The only difference with FetchContent_MakeAvailable is the
-    # option EXCLUDE_FROM_ALL.
-    
-    foreach(NAME IN LISTS ARGN)
-      FetchContent_GetProperties(${NAME})
-      string(TOLOWER ${NAME} lcName)
-      
-      if(NOT ${lcName}_POPULATED)
-	FetchContent_Populate(${NAME})
-
-	add_subdirectory(${${lcName}_SOURCE_DIR} ${${lcName}_BINARY_DIR}
-	  EXCLUDE_FROM_ALL)
-      endif()
-    endforeach()
-  endfunction()
-
   FetchContent_Declare(NR_util GIT_REPOSITORY
     https://github.com/lguez/NR_util.git)
 
@@ -32,7 +15,7 @@ if(FETCH)
   FetchContent_Declare(NetCDF95 GIT_REPOSITORY
     https://github.com/lguez/NetCDF95.git)
 
-  MakeAvailable(NR_util Jumble NetCDF95)
+  FetchContent_MakeAvailable(NR_util Jumble NetCDF95)
 else()
   list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
   find_package(Jumble CONFIG REQUIRED)
