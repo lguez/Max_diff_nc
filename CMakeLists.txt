@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 list(APPEND CMAKE_MESSAGE_CONTEXT Max_diff_nc)
 project(Max_diff_nc LANGUAGES Fortran)
-option(FETCH "Download")
+option(FETCH "Download and build required libraries")
 
 if(FETCH)
   include(FetchContent)
