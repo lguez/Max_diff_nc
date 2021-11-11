@@ -23,8 +23,15 @@ if(FETCH)
 
   FetchContent_MakeAvailable(NR_util Jumble NetCDF95)
 else()
-  find_package(Jumble CONFIG REQUIRED)
-  find_package(NetCDF95 REQUIRED CONFIG)
+  find_package(Jumble CONFIG)
+  find_package(NetCDF95 CONFIG)
+  
+  if (NOT Jumble_FOUND OR NOT NetCDF95_FOUND)
+    message(FATAL_ERROR [[
+      Jumble or NetCDF95 not found, consider the option of cmake:
+      -DFETCH=True
+      ]])
+  endif()
 endif()
 
 add_executable(max_diff_nc max_diff_nc.f90)
