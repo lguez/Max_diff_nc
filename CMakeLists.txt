@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 list(APPEND CMAKE_MESSAGE_CONTEXT Max_diff_nc)
 project(Max_diff_nc LANGUAGES Fortran)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+find_package(NetCDF_Fortran REQUIRED)
 option(FETCH "Download and build required libraries")
 
 if(FETCH)
@@ -17,10 +19,8 @@ if(FETCH)
 
   FetchContent_MakeAvailable(NR_util Jumble NetCDF95)
 else()
-  list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
   find_package(Jumble CONFIG REQUIRED)
   find_package(NetCDF95 REQUIRED CONFIG)
-  find_package(NetCDF_Fortran REQUIRED)
 endif()
 
 add_executable(max_diff_nc max_diff_nc.f90)
