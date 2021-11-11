@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.17)
 list(APPEND CMAKE_MESSAGE_CONTEXT Max_diff_nc)
+
+set(CMAKE_BUILD_TYPE Release CACHE STRING
+  "Choose the type of build: Debug,Release...")
+
 project(Max_diff_nc LANGUAGES Fortran)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
 find_package(NetCDF_Fortran REQUIRED)

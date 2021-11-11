@@ -43,7 +43,7 @@ same Fortran compiler than used for NetCDF-Fortran.
     `$CMAKE_INSTALL_PREFIX/bin` to be in your `PATH` environment
     variable.
 
-        cmake .. -DCMAKE_BUILD_TYPE=Release -DFETCH=ON -DCMAKE_INSTALL_PREFIX=/wherever
+        cmake .. -DFETCH=ON -DCMAKE_INSTALL_PREFIX=/wherever
 
 4.  Type:
 
