@@ -3,14 +3,12 @@ date: '2020-04-03'
 title: Installation
 ---
 
-Installation
-===
+# Installation
 
 See [note](French_centers.md) for users of French supercomputing
 centers.
 
-Installation with CMake
----
+## Installation with CMake
 
 This is the recommended way.
 
@@ -53,8 +51,24 @@ Note that the installation process also installs a Fortran executable
 file, `max_diff_nc`, in `$CMAKE_INSTALL_PREFIX/libexec`. Do not remove
 this file.
 
-Installation directly with make
----
+### Troubleshooting installation with CMake
+
+If your installation of NetCDF or NetCDF-Fortran is in a non-standard
+location, and CMake does not find it, then re-run cmake setting the
+variable `CMAKE_PREFIX_PATH` to the directory containing it. CMake
+will then search `${CMAKE_PREFIX_PATH}/lib`,
+`${CMAKE_PREFIX_PATH}/include`, etc. For example:
+
+	cmake . -DCMAKE_PREFIX_PATH:PATH=/path/to/my/favorite/installation
+
+If CMake picks an installation of NetCDF with a CMake config file, and
+you want another installation of NetCDF that does not have a CMake
+config file, then re-run cmake with the option
+`FIND_PACKAGE_PREFER_MODULE_netCDF`:
+
+	cmake . -DFIND_PACKAGE_PREFER_MODULE_netCDF=ON
+
+## installation directly with make
 
 This is the (old) less automated way, not recommended.
 
