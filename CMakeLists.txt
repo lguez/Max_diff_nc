@@ -12,16 +12,13 @@ option(FETCH "Download and build required libraries")
 if(FETCH)
   include(FetchContent)
   
-  FetchContent_Declare(NR_util GIT_REPOSITORY
-    https://github.com/lguez/NR_util.git)
-
   FetchContent_Declare(Jumble GIT_REPOSITORY
     https://github.com/lguez/Jumble.git)
 
   FetchContent_Declare(NetCDF95 GIT_REPOSITORY
     https://github.com/lguez/NetCDF95.git)
 
-  FetchContent_MakeAvailable(NR_util Jumble NetCDF95)
+  FetchContent_MakeAvailable(Jumble NetCDF95)
 else()
   find_package(Jumble CONFIG)
   find_package(NetCDF95 CONFIG)
