@@ -127,7 +127,7 @@ program max_diff_nc
               if (different_domains) valid1_1d = valid1_1d .and. valid2_1d
               deallocate(valid2_1d)
               call compare(v1_1d, v2_1d, trim(tag(i)), comp_mag, report_id, &
-                   quiet, different_domains, valid = valid1_1d)
+                   quiet, valid1_1d, different_domains)
               deallocate(v1_1d, v2_1d, valid1_1d)
            case (2) float_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_2d)
@@ -139,7 +139,7 @@ program max_diff_nc
               if (different_domains) valid1_2d = valid1_2d .and. valid2_2d
               deallocate(valid2_2d)
               call compare(v1_2d, v2_2d, trim(tag(i)), comp_mag, report_id, &
-                   quiet, different_domains, valid = valid1_2d)
+                   quiet, valid1_2d, different_domains)
               deallocate(v1_2d, v2_2d, valid1_2d)
            case (3) float_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_3d)
@@ -151,7 +151,7 @@ program max_diff_nc
               if (different_domains) valid1_3d = valid1_3d .and. valid2_3d
               deallocate(valid2_3d)
               call compare(v1_3d, v2_3d, trim(tag(i)), comp_mag, report_id, &
-                   quiet, different_domains, valid = valid1_3d)
+                   quiet, valid1_3d, different_domains)
               deallocate(v1_3d, v2_3d, valid1_3d)
            case (4) float_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_4d)
@@ -163,7 +163,7 @@ program max_diff_nc
               if (different_domains) valid1_4d = valid1_4d .and. valid2_4d
               deallocate(valid2_4d)
               call compare(v1_4d, v2_4d, trim(tag(i)), comp_mag, report_id, &
-                   quiet, different_domains, valid = valid1_4d)
+                   quiet, valid1_4d, different_domains)
               deallocate(v1_4d, v2_4d, valid1_4d)
            end select float_select_ndims
         else if (xtype1 == nf90_double) then test_type
@@ -181,7 +181,7 @@ program max_diff_nc
               if (different_domains) valid1_1d = valid1_1d .and. valid2_1d
               deallocate(valid2_1d)
               call compare(v1_dble_1d, v2_dble_1d, trim(tag(i)), comp_mag, &
-                   report_id, quiet, different_domains, valid = valid1_1d)
+                   report_id, quiet, valid1_1d, different_domains)
               deallocate(v1_dble_1d, v2_dble_1d, valid1_1d)
            case (2) double_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_dble_2d)
@@ -193,7 +193,7 @@ program max_diff_nc
               if (different_domains) valid1_2d = valid1_2d .and. valid2_2d
               deallocate(valid2_2d)
               call compare(v1_dble_2d, v2_dble_2d, trim(tag(i)), comp_mag, &
-                   report_id, quiet, different_domains, valid = valid1_2d)
+                   report_id, quiet, valid1_2d, different_domains)
               deallocate(v1_dble_2d, v2_dble_2d, valid1_2d)
            case (3) double_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_dble_3d)
@@ -205,7 +205,7 @@ program max_diff_nc
               if (different_domains) valid1_3d = valid1_3d .and. valid2_3d
               deallocate(valid2_3d)
               call compare(v1_dble_3d, v2_dble_3d, trim(tag(i)), comp_mag, &
-                   report_id, quiet, different_domains, valid = valid1_3d)
+                   report_id, quiet, valid1_3d, different_domains)
               deallocate(v1_dble_3d, v2_dble_3d, valid1_3d)
            case (4) double_select_ndims
               call nf95_gw_var(ncid1, varid1(i), v1_dble_4d)
@@ -217,7 +217,7 @@ program max_diff_nc
               if (different_domains) valid1_4d = valid1_4d .and. valid2_4d
               deallocate(valid2_4d)
               call compare(v1_dble_4d, v2_dble_4d, trim(tag(i)), comp_mag, &
-                   report_id, quiet, different_domains, valid = valid1_4d)
+                   report_id, quiet, valid1_4d, different_domains)
               deallocate(v1_dble_4d, v2_dble_4d, valid1_4d)
            end select double_select_ndims
         else test_type
