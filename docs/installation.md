@@ -52,20 +52,13 @@ this file.
 
 ### Troubleshooting installation with CMake
 
-If your installation of NetCDF or NetCDF-Fortran is in a non-standard
+If your installation of NetCDF-Fortran is in a non-standard
 location, and CMake does not find it, then re-run cmake setting the
 variable `CMAKE_PREFIX_PATH` to the directory containing it. CMake
 will then search `${CMAKE_PREFIX_PATH}/lib`,
 `${CMAKE_PREFIX_PATH}/include`, etc. For example:
 
 	cmake . -DCMAKE_PREFIX_PATH:PATH=/path/to/my/favorite/installation
-
-If CMake picks an installation of NetCDF with a CMake config file, and
-you want another installation of NetCDF that does not have a CMake
-config file, then re-run cmake with the option
-`FIND_PACKAGE_PREFER_MODULE_netCDF`:
-
-	cmake . -DFIND_PACKAGE_PREFER_MODULE_netCDF=ON
 
 ## Installation directly with make
 
