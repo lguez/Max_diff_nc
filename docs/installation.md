@@ -21,13 +21,16 @@ Dependencies: you must first install
 same Fortran compiler than used for NetCDF-Fortran.
 
 1.  Get [max\_diff\_nc from
-    Github](https://github.com/lguez/Max_diff_nc). The directory you
-    get could be called max\_diff\_nc or max\_diff\_nc-master
-    (depending on whether you cloned or downloaded a ZIP file).
+    Github](https://github.com/lguez/Max_diff_nc). As the Git
+    repository contains a submodule, the easiest way is to type:
 
-2.  Type:
+		git clone --recurse-submodules https://github.com/lguez/Max_diff_nc.git
 
-        cd the-directory-you-just-downloaded
+	If you prefer to download a ZIP file then you will also have to
+    download the [cmake subdirectory](https://github.com/lguez/cmake).
+
+2.  Go to the directory you have just downloaded and type:
+
         mkdir build
         cd build
 
