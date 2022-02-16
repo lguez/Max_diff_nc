@@ -3,8 +3,7 @@ date: '2019-10-23'
 title: What is it?
 ---
 
-What is it?
-===========
+# What is it?
 
 This is a program which compares two
 [NetCDF](http://www.unidata.ucar.edu/software/netcdf) files. Only NetCDF
@@ -16,3 +15,5 @@ maximum of the absolute value of the difference, and the maximum of the
 absolute value of the relative difference. The program also tells you at
 what location (the subscript list of the array) the maximum difference
 is reached.
+
+Author: [Lionel GUEZ](https://www.lmd.jussieu.fr/~lguez)

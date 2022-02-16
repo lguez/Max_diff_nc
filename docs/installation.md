@@ -12,9 +12,8 @@ centers.
 
 This is the recommended way.
 
-Dependencies: you must first install [CMake](https://cmake.org/download)
-(version ≥ 3.17) and the libraries
-[NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp) and
+Dependencies: you must first install
+[CMake](https://cmake.org/download) (version ≥ 3.17) and the library
 [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp).
 
 `max_diff_nc` is written in Fortran 2003 and Bash so you need a Fortran
@@ -68,16 +67,16 @@ config file, then re-run cmake with the option
 
 	cmake . -DFIND_PACKAGE_PREFER_MODULE_netCDF=ON
 
-## installation directly with make
+## Installation directly with make
 
 This is the (old) less automated way, not recommended.
 
 Dependencies: you must first install the libraries
 [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp),
 [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp),
-[NetCDF95](https://www.lmd.jussieu.fr/~lguez/NetCDF95_site/index.html),
-[NR\_util](https://www.lmd.jussieu.fr/~lguez/NR_util_site/index.html)
-and [Jumble](https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html).
+[NetCDF95](https://www.lmd.jussieu.fr/~lguez/NetCDF95_site/index.html)
+and
+[Jumble](https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html).
 The four Fortran libraries, NetCDF-Fortran, NetCDF95, NR\_util and
 Jumble, must be compiled with the same compiler.
 
@@ -111,13 +110,13 @@ same Fortran compiler than used for the four Fortran libraries.
 
 4.  In GNUmakefile, locate the line defining the variable LDLIBS:
 
-        LDLIBS = -L${HOME}/.local/lib -ljumble -lnr_util -lnetcdf95 -lnetcdff -lnetcdf
+        LDLIBS = -L${HOME}/.local/lib -ljumble -lnetcdf95 -lnetcdff -lnetcdf
 
     If `${HOME}/.local/lib` is not the path to the NetCDF-C,
-    NetCDF-Fortran, NetCDF95, `NR_util` and Jumble libraries
-    (NetCDF-Fortran depends on NetCDF-C and Jumble depends on
-    `NR_util`) and they are not in standard locations, replace the
-    path. If there are several paths, type each path after `-L`:
+    NetCDF-Fortran, NetCDF95 and Jumble libraries (NetCDF-Fortran
+    depends on NetCDF-C) and they are not in standard locations,
+    replace the path. If there are several paths, type each path after
+    `-L`:
 
         -Lpath1 -Lpath2 -Lpath3
 
