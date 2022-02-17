@@ -68,22 +68,22 @@ will then search `${CMAKE_PREFIX_PATH}/lib`,
 This is the (old) less automated way, not recommended.
 
 Dependencies: you must first install the libraries
-[NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp),
 [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp),
 [NetCDF95](https://www.lmd.jussieu.fr/~lguez/NetCDF95_site/index.html)
 and
 [Jumble](https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html).
-The four Fortran libraries, NetCDF-Fortran, NetCDF95, NR\_util and
-Jumble, must be compiled with the same compiler.
+The three Fortran libraries, NetCDF-Fortran, NetCDF95 and Jumble, must
+be compiled with the same compiler.
 
 `max_diff_nc` is written in Fortran 2003 and Bash so you need a Fortran
 2003 compiler and Bash on your machine. Moreover, you need to use the
-same Fortran compiler than used for the four Fortran libraries.
+same Fortran compiler than used for the three Fortran libraries.
 
 1.  Get [max\_diff\_nc from
     Github](https://github.com/lguez/Max_diff_nc). The directory you get
     could be called max\_diff\_nc or max\_diff\_nc-master (depending on
     whether you cloned or downloaded a ZIP file).
+
 2.  In the file GNUmakefile, locate the line:
 
         FC = gfortran
