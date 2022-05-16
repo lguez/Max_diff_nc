@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 # This is a script in Bash.
 # Author: Lionel GUEZ
 
