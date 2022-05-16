@@ -29,10 +29,11 @@ same Fortran compiler than used for NetCDF-Fortran.
 	If you prefer to download a ZIP file then you will also have to
     download the [cmake subdirectory](https://github.com/lguez/cmake).
 
-2.  Go to the directory you have just downloaded and type:
+2.  Create a build subdirectory in the directory you have just downloaded:
 
+        cd Max_diff_nc
         mkdir build
-        cd build
+		cd build
 
 3.  Choose the installation directory `CMAKE_INSTALL_PREFIX` and type
     the command below with your choice after `-DCMAKE_INSTALL_PREFIX=`
