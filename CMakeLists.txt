@@ -26,7 +26,7 @@ else()
   endif()
 endif()
 
-add_executable(max_diff_nc max_diff_nc.f90)
+add_executable(max_diff_nc max_diff_nc.f90 compare_groups.f90)
 target_link_libraries(max_diff_nc PRIVATE NetCDF95::netcdf95
   NetCDF_Fortran::netcdff Jumble::jumble)
 
