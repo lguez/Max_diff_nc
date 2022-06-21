@@ -1,0 +1,18 @@
+[
+    {
+	"title": "Control",
+	"command":
+	[
+	    "$build_dir/max_diff_nc.sh", "$src_dir/Tests/test_1.nc",
+	    "$src_dir/Tests/test_2.nc"
+	]
+    },
+    {
+	"title": "Groups",
+	"command":
+	[
+	    "$build_dir/max_diff_nc.sh", "$src_dir/Tests/test_group_1.nc",
+	    "$src_dir/Tests/test_group_2.nc"
+	]
+    }
+]
