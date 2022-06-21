@@ -4,14 +4,15 @@ module compare_groups_m
 
 contains
 
-  subroutine compare_groups(same_varid, report_id, quiet, comp_mag, name1_in, &
-       ncid1, ncid2, group_name)
+  recursive subroutine compare_groups(same_varid, report_id, quiet, comp_mag, &
+       name1_in, ncid1, ncid2, group_name)
 
     ! Libraries:
     use jumble, only: compare
     use netcdf, only: nf90_noerr, nf90_max_name, NF90_FLOAT, NF90_double
     use netcdf95, only: nf95_gw_var, nf95_inq_varid, nf95_inquire, &
-         nf95_inquire_variable, nf95_get_missing
+         nf95_inquire_variable, nf95_get_missing, nf95_inq_grps, &
+         nf95_inq_grpname_full, nf95_inq_grp_full_ncid, nf95_inq_grpname
 
     logical, intent(in):: same_varid ! compare variables with same varid
     logical, intent(in):: report_id ! report identical variables
@@ -49,6 +50,9 @@ contains
     integer i
     real miss1, miss2
     double precision miss1_dble, miss2_dble
+    integer, allocatable:: ncids(:)
+    integer n_groups, grpid
+    character(len = :), allocatable:: child_group_name, abs_child_group_name
 
     !--------------------------------------------------------------------
 
@@ -224,6 +228,34 @@ contains
           end if test_type
        end if test_dim
     end do loop_var
+
+    call nf95_inq_grps(ncid1, ncids)
+    n_groups = size(ncids)
+
+    if (n_groups /= 0) then
+       print '(/, "*************", /)'
+       print *, "Found ", n_groups, " group(s) immediately under ", &
+            group_name, " in the first file."
+
+       do i = 1, n_groups
+          call nf95_inq_grpname(ncids(i), child_group_name)
+          call nf95_inq_grp_full_ncid(ncid2, child_group_name, grpid, ncerr)
+
+          if (ncerr == nf90_noerr) then
+             if (group_name == "/") then
+                abs_child_group_name = "/" // child_group_name
+             else
+                abs_child_group_name = group_name // "/" // child_group_name
+             end if
+
+             call compare_groups(same_varid, report_id, quiet, comp_mag, &
+                  name1_in, ncids(i), grpid, abs_child_group_name)
+          else
+             print *, 'Could not find ', child_group_name, ' under ', &
+                  group_name, ' in the second file. Comparison will be skipped.'
+          end if
+       end do
+    end if
 
   end subroutine compare_groups
 
