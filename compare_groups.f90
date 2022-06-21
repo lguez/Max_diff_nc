@@ -5,7 +5,7 @@ module compare_groups_m
 contains
 
   subroutine compare_groups(same_varid, report_id, quiet, comp_mag, name1_in, &
-       ncid1, ncid2)
+       ncid1, ncid2, group_name)
 
     ! Libraries:
     use jumble, only: compare
@@ -19,6 +19,7 @@ contains
     logical, intent(in):: comp_mag ! compute avergage order of magnitude
     character(len = *), intent(in):: name1_in
     integer, intent(in):: ncid1, ncid2
+    character(len = *), intent(in):: group_name
 
     ! Local:
     character(len = nf90_max_name) name1
@@ -56,7 +57,8 @@ contains
     if (name1_in == "") then
        ! We want to compare all the variables
        call nf95_inquire(ncid1, nvariables = nvariables)
-       print *, "Found ", nvariables, " variable(s) in the first file."
+       print *, "Found ", nvariables, " variable(s) in group ", group_name, &
+            " in the first file."
        allocate(varid1(nvariables), varid2(nvariables), tag(nvariables))
 
        if (same_varid) then

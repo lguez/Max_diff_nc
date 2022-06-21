@@ -37,7 +37,7 @@ program max_diff_nc
   call get_command_arg_dyn(2, filename)
   call nf95_open(filename, nf90_nowrite, ncid2)
   call compare_groups(same_varid, report_id, quiet, comp_mag, name1, ncid1, &
-       ncid2)
+       ncid2, group_name = "/")
   call nf95_close(ncid1)
   call nf95_close(ncid2)
 
