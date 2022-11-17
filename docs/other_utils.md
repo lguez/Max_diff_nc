@@ -10,8 +10,8 @@ You can obtain similar information with other tools:
 [nccmp](https://gitlab.com/remikz/nccmp),
 [cdo](https://code.zmaw.de/projects/cdo) `diff`,
 [ncdiff](http://nco.sourceforge.net/nco.html#ncbo-netCDF-Binary-Operator),
-[Ferret](http://ferret.wrc.noaa.gov/Ferret)... The information you get
-with these other tools is similar but not identical.
+[Ferret](https://ferret.pmel.noaa.gov/Ferret)... The information you
+get with these other tools is similar but not identical.
 
 `nccmp` tells you whether the contents of the two files are different.
 You can give `nccmp` a "tolerance", so that if the difference

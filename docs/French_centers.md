@@ -3,7 +3,7 @@ Note for the users of French supercomputing centers
 
 `max_diff_nc` is installed:
 
--   on the machine ciclad of IPSL computing center at:
+-   on the machine spirit of IPSL computing center at:
 
         /data/guez/bin/max_diff_nc.sh
 

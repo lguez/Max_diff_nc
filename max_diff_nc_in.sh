@@ -26,7 +26,7 @@ USAGE="usage: `basename $0` [-s] [-m] [-i] [-q] [-v <var>] file file-or-director
    -v <var>: only compare variable <var>
 
 For further documentation, see:
-https://www.lmd.jussieu.fr/~lguez/Max_diff_nc_site/index.html"
+https://lguez.github.io/Max_diff_nc"
 
 # Default values:
 report_id=False

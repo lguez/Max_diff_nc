@@ -1,24 +1,24 @@
----
-date: '2020-04-03'
-title: Installation
----
-
 # Installation
 
 See [note](French_centers.md) for users of French supercomputing
 centers.
 
+## Dependencies
+
+`max_diff_nc` is written in Fortran 2003 and Bash so you need a Fortran
+2003 compiler and Bash on your machine.
+
+You must first install the library
+[NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp),
+with the same Fortran compiler than the one you want to use for
+`Max_diff_nc`.
+
 ## Installation with CMake
 
 This is the recommended way.
 
-Dependencies: you must first install
-[CMake](https://cmake.org/download) (version ≥ 3.17) and the library
-[NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp).
-
-`max_diff_nc` is written in Fortran 2003 and Bash so you need a Fortran
-2003 compiler and Bash on your machine. Moreover, you need to use the
-same Fortran compiler than used for NetCDF-Fortran.
+Additional dependency: [CMake](https://cmake.org/download) (version ≥
+3.17).
 
 1.  Get [max\_diff\_nc from
     Github](https://github.com/lguez/Max_diff_nc). As the Git
@@ -33,7 +33,7 @@ same Fortran compiler than used for NetCDF-Fortran.
 
         cd Max_diff_nc
         mkdir build
-		cd build
+        cd build
 
 3.  Choose the installation directory `CMAKE_INSTALL_PREFIX` and type
     the command below with your choice after `-DCMAKE_INSTALL_PREFIX=`
@@ -68,17 +68,12 @@ will then search `${CMAKE_PREFIX_PATH}/lib`,
 
 This is the (old) less automated way, not recommended.
 
-Dependencies: you must first install the libraries
-[NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp),
+Additional dependencies: the libraries
 [NetCDF95](https://www.lmd.jussieu.fr/~lguez/NetCDF95_site/index.html)
 and
-[Jumble](https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html).
-The three Fortran libraries, NetCDF-Fortran, NetCDF95 and Jumble, must
-be compiled with the same compiler.
-
-`max_diff_nc` is written in Fortran 2003 and Bash so you need a Fortran
-2003 compiler and Bash on your machine. Moreover, you need to use the
-same Fortran compiler than used for the three Fortran libraries.
+[Jumble](https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html),
+which must be compiled with the same compiler than the one used for
+NetCDF-Fortran and `Max_diff_nc`.
 
 1.  Get [max\_diff\_nc from
     Github](https://github.com/lguez/Max_diff_nc). The directory you get
