@@ -9,15 +9,14 @@ program max_diff_nc
 
   ! Libraries:
   use jumble, only: get_command_arg_dyn
-  use netcdf, only: nf90_nowrite, nf90_max_name
-  use netcdf95, only: nf95_close, nf95_open
+  use netcdf95, only: nf95_close, nf95_open, nf95_nowrite, nf95_max_name
 
   use compare_groups_m, only: compare_groups
 
   implicit none
 
   integer ncid1, ncid2
-  character(len = nf90_max_name) name1
+  character(len = nf95_max_name) name1
   logical same_varid ! compare variables with same varid
   logical report_id ! report identical variables
   logical comp_mag ! compute avergage order of magnitude
@@ -33,9 +32,9 @@ program max_diff_nc
   read "(a)", name1
 
   call get_command_arg_dyn(1, filename)
-  call nf95_open(filename, nf90_nowrite, ncid1)
+  call nf95_open(filename, nf95_nowrite, ncid1)
   call get_command_arg_dyn(2, filename)
-  call nf95_open(filename, nf90_nowrite, ncid2)
+  call nf95_open(filename, nf95_nowrite, ncid2)
   call compare_groups(same_varid, report_id, quiet, comp_mag, name1, ncid1, &
        ncid2, group_name = "/")
   call nf95_close(ncid1)

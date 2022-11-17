@@ -9,10 +9,10 @@ contains
 
     ! Libraries:
     use jumble, only: compare
-    use netcdf, only: nf90_noerr, nf90_max_name, NF90_FLOAT, NF90_double
     use netcdf95, only: nf95_gw_var, nf95_inq_varid, nf95_inquire, &
          nf95_inquire_variable, nf95_get_missing, nf95_inq_grps, &
-         nf95_inq_grpname_full, nf95_inq_grp_full_ncid, nf95_inq_grpname
+         nf95_inq_grpname_full, nf95_inq_grp_full_ncid, nf95_inq_grpname, &
+         nf95_noerr, nf95_max_name, NF95_FLOAT, NF95_double
 
     logical, intent(in):: same_varid ! compare variables with same varid
     logical, intent(in):: report_id ! report identical variables
@@ -23,7 +23,7 @@ contains
     character(len = *), intent(in):: group_name
 
     ! Local:
-    character(len = nf90_max_name) name1
+    character(len = nf95_max_name) name1
     integer ncerr, xtype1, ndims
     integer nvariables ! number of variables in the first file
     integer nvar_comp ! number of variables which will be compared
@@ -46,7 +46,7 @@ contains
     logical, allocatable:: valid1_4d(:, :, :, :), valid2_4d(:, :, :, :)
 
     logical different_domains
-    character(len = 30+nf90_max_name), allocatable:: tag(:)
+    character(len = 30+nf95_max_name), allocatable:: tag(:)
     integer i
     real miss1, miss2
     double precision miss1_dble, miss2_dble
@@ -83,7 +83,7 @@ contains
              call nf95_inq_varid(ncid2, trim(name1), varid2(nvar_comp + 1), &
                   ncerr)
 
-             if (ncerr == nf90_noerr) then
+             if (ncerr == nf95_noerr) then
                 varid1(nvar_comp + 1) = i
                 tag(nvar_comp + 1) = 'Variable "' // trim(name1) // '"'
                 nvar_comp = nvar_comp + 1
@@ -112,7 +112,7 @@ contains
           print *, "Rank not supported."
           print *, "ndims = ", ndims
        else test_dim
-          test_type: if (xtype1 == nf90_float) then
+          test_type: if (xtype1 == nf95_float) then
              call nf95_get_missing(ncid1, varid1(i), miss1)
              call nf95_get_missing(ncid2, varid2(i), miss2)
 
@@ -166,7 +166,7 @@ contains
                      quiet, valid1_4d, different_domains)
                 deallocate(v1_4d, v2_4d, valid1_4d)
              end select float_select_ndims
-          else if (xtype1 == nf90_double) then test_type
+          else if (xtype1 == nf95_double) then test_type
              call nf95_get_missing(ncid1, varid1(i), miss1_dble)
              call nf95_get_missing(ncid2, varid2(i), miss2_dble)
 
@@ -224,7 +224,7 @@ contains
              print *
              print *, "******************"
              print *, trim(tag(i)) // ":"
-             print *, 'Not of type "nf90_float or "nf90_double".'
+             print *, 'Not of type "nf95_float or "nf95_double".'
           end if test_type
        end if test_dim
     end do loop_var
@@ -241,7 +241,7 @@ contains
           call nf95_inq_grpname(ncids(i), child_group_name)
           call nf95_inq_grp_full_ncid(ncid2, child_group_name, grpid, ncerr)
 
-          if (ncerr == nf90_noerr) then
+          if (ncerr == nf95_noerr) then
              if (group_name == "/") then
                 abs_child_group_name = "/" // child_group_name
              else
