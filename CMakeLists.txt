@@ -4,7 +4,6 @@ set(CMAKE_BUILD_TYPE Release CACHE STRING
   "Choose the type of build: Debug,Release...")
 project(Max_diff_nc LANGUAGES Fortran)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
-find_package(NetCDF_Fortran REQUIRED)
 option(FETCH "Download and build required libraries")
 
 if(FETCH)
@@ -27,8 +26,7 @@ else()
 endif()
 
 add_executable(max_diff_nc max_diff_nc.f90 compare_groups.f90)
-target_link_libraries(max_diff_nc PRIVATE NetCDF95::netcdf95
-  NetCDF_Fortran::netcdff Jumble::jumble)
+target_link_libraries(max_diff_nc PRIVATE NetCDF95::netcdf95 Jumble::jumble)
 
 # Installation part:
 include(GNUInstallDirs)
