@@ -10,11 +10,9 @@
   <link rel="canonical" href="https://www.lmd.jussieu.fr/~lguez/Max_diff_nc_site/index.html/installation/">
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Installation - Max_diff_nc documentation</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
-
   <link rel="stylesheet" href="../css/theme.css" />
   <link rel="stylesheet" href="../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,8 +23,9 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
+  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -40,7 +39,7 @@
         <a href=".." class="icon icon-home"> Max_diff_nc documentation</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -54,13 +53,13 @@
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Installation</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#installation-with-cmake">Installation with CMake</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#troubleshooting-installation-with-cmake">Troubleshooting installation with CMake</a>
+    <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a>
     </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#instructions">Instructions</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#installation-directly-with-make">Installation directly with make</a>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-instructions">Advanced instructions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
     </li>
     </ul>
                     </li>
@@ -121,21 +120,29 @@
   
   <hr/>
 </div>
-
           <div role="main">
             <div class="section">
               
                 <h1 id="installation">Installation</h1>
 <p>See <a href="../French_centers/">note</a> for users of French supercomputing
 centers.</p>
-<h2 id="installation-with-cmake">Installation with CMake</h2>
-<p>This is the recommended way.</p>
-<p>Dependencies: you must first install
-<a href="https://cmake.org/download">CMake</a> (version ≥ 3.17) and the library
-<a href="https://www.unidata.ucar.edu/downloads/netcdf/index.jsp">NetCDF-Fortran</a>.</p>
-<p><code>max_diff_nc</code> is written in Fortran 2003 and Bash so you need a Fortran
-2003 compiler and Bash on your machine. Moreover, you need to use the
-same Fortran compiler than used for NetCDF-Fortran.</p>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>
+<p><code>max_diff_nc</code> is written in Fortran (2003) and Bash so you need a
+Fortran 2003 compiler and Bash on your machine.</p>
+</li>
+<li>
+<p>Install the library
+<a href="https://www.unidata.ucar.edu/downloads/netcdf/index.jsp">NetCDF-Fortran</a>,
+with the same Fortran compiler than the one you want to use for
+<code>Max_diff_nc</code>.</p>
+</li>
+<li>
+<p><a href="https://cmake.org/download">CMake</a> (version ≥ 3.17).</p>
+</li>
+</ul>
+<h2 id="instructions">Instructions</h2>
 <ol>
 <li>
 <p>Get <a href="https://github.com/lguez/Max_diff_nc">max_diff_nc from
@@ -161,8 +168,8 @@ cd build
     install a shell script, <code>max_diff_nc.sh</code>, in
     <code>$CMAKE_INSTALL_PREFIX/bin</code>. It is convenient for
     <code>$CMAKE_INSTALL_PREFIX/bin</code> to be in your <code>PATH</code> environment
-    variable.</p>
-<pre><code>cmake .. -DFETCH=ON -DCMAKE_INSTALL_PREFIX=/wherever
+    variable. For example:</p>
+<pre><code>cmake .. -DFETCH=ON -DCMAKE_INSTALL_PREFIX=~/.local
 </code></pre>
 </li>
 <li>
@@ -171,10 +178,31 @@ cd build
 </code></pre>
 </li>
 </ol>
-<p>Note that the installation process also installs a Fortran executable
-file, <code>max_diff_nc</code>, in <code>$CMAKE_INSTALL_PREFIX/libexec</code>. Do not remove
-this file.</p>
-<h3 id="troubleshooting-installation-with-cmake">Troubleshooting installation with CMake</h3>
+<p>You do not need to keep the downloaded directory <code>Max_diff_nc</code> after
+installation. Note that the installation process also installs a
+Fortran executable file, <code>max_diff_nc</code>, in
+<code>$CMAKE_INSTALL_PREFIX/libexec</code>. Do not remove this file.</p>
+<h2 id="advanced-instructions">Advanced instructions</h2>
+<ol>
+<li>
+<p>You can choose any name and any location for the build
+   directory. You have to refer to the source directory when you run
+   cmake from the build directory:</p>
+<pre><code>mkdir /wherever/any/name
+cd /wherever/any/name
+cmake /where/I/downloaded/Max_diff_nc -DFETCH=ON -DCMAKE_INSTALL_PREFIX=~/.local
+</code></pre>
+</li>
+<li>
+<p>The option <code>-DFETCH=ON</code> instructs CMake to download, compile and
+   install the libraries <a href="https://lguez.github.io/NetCDF95">NetCDF95</a>
+   and
+   <a href="https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html">Jumble</a>. If
+   you have already installed these libraries, you can omit the FETCH
+   option.</p>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
 <p>If your installation of NetCDF-Fortran is in a non-standard
 location, and CMake does not find it, then re-run cmake setting the
 variable <code>CMAKE_PREFIX_PATH</code> to the directory containing it. CMake
@@ -182,95 +210,6 @@ will then search <code>${CMAKE_PREFIX_PATH}/lib</code>,
 <code>${CMAKE_PREFIX_PATH}/include</code>, etc. For example:</p>
 <pre><code>cmake . -DCMAKE_PREFIX_PATH:PATH=/path/to/my/favorite/installation
 </code></pre>
-<h2 id="installation-directly-with-make">Installation directly with make</h2>
-<p>This is the (old) less automated way, not recommended.</p>
-<p>Dependencies: you must first install the libraries
-<a href="https://www.unidata.ucar.edu/downloads/netcdf/index.jsp">NetCDF-Fortran</a>,
-<a href="https://www.lmd.jussieu.fr/~lguez/NetCDF95_site/index.html">NetCDF95</a>
-and
-<a href="https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html">Jumble</a>.
-The three Fortran libraries, NetCDF-Fortran, NetCDF95 and Jumble, must
-be compiled with the same compiler.</p>
-<p><code>max_diff_nc</code> is written in Fortran 2003 and Bash so you need a Fortran
-2003 compiler and Bash on your machine. Moreover, you need to use the
-same Fortran compiler than used for the three Fortran libraries.</p>
-<ol>
-<li>
-<p>Get <a href="https://github.com/lguez/Max_diff_nc">max_diff_nc from
-    Github</a>. The directory you get
-    could be called max_diff_nc or max_diff_nc-master (depending on
-    whether you cloned or downloaded a ZIP file).</p>
-</li>
-<li>
-<p>In the file GNUmakefile, locate the line:</p>
-<pre><code>FC = gfortran
-</code></pre>
-<p>If the compiler you are going to use is not GNU Fortran, replace
-gfortran by the command name for your compiler.</p>
-</li>
-<li>
-<p>In GNUmakefile, locate the line defining the variable FFLAGS:</p>
-<pre><code>FFLAGS = -O2 -I${HOME}/.local/include
-</code></pre>
-<p>If <code>${HOME}/.local/include</code> is not the path to the compiled
-NetCDF-Fortran, NetCDF95 and Jumble module interfaces (usually
-<code>netcdf.mod</code>, <code>netcdf95.mod</code> and <code>jumble.mod</code>), replace it. If
-there are several paths, type each path after <code>-I</code>:</p>
-<pre><code>-Ipath1 -Ipath2 -Ipath3
-</code></pre>
-<p>(the order does not matter).</p>
-</li>
-<li>
-<p>In GNUmakefile, locate the line defining the variable LDLIBS:</p>
-<pre><code>LDLIBS = -L${HOME}/.local/lib -ljumble -lnetcdf95 -lnetcdff -lnetcdf
-</code></pre>
-<p>If <code>${HOME}/.local/lib</code> is not the path to the NetCDF-C,
-NetCDF-Fortran, NetCDF95 and Jumble libraries (NetCDF-Fortran
-depends on NetCDF-C) and they are not in standard locations,
-replace the path. If there are several paths, type each path after
-<code>-L</code>:</p>
-<pre><code>-Lpath1 -Lpath2 -Lpath3
-</code></pre>
-<p>(the order does not matter). You may need additional options in
-LDLIBS required by your NetCDF-C installation. See for example
-<a href="https://www.unidata.ucar.edu/software/netcdf/workshops/most-recent/utilities/Nc-config.html">nc-config</a>
-or <a href="https://www.unidata.ucar.edu/software/netcdf/fortran/docs/f90-use-of-the-netcdf-library.html#f90-compiling-and-linking-with-the-netcdf-library">Compiling and Linking with the NetCDF
-Library</a>.</p>
-</li>
-<li>
-<p>The makefiles are written for GNU make. The command invoking GNU
-    make is usually just:</p>
-<pre><code>make
-</code></pre>
-<p>After compilation, the executable binary file <code>max_diff_nc</code> should
-be created in the directory <code>Max_diff_nc</code>. There is also a Bash
-script <code>max_diff_nc_in.sh</code> in the directory <code>Max_diff_nc</code>.</p>
-</li>
-<li>
-<p>Decide where you want to keep the executable binary file
-    <code>max_diff_nc</code> and move it there. (Or you can just leave it where it
-    is, if you want.) We advise <em>not</em> to put it into a directory
-    appearing in your environment variable <code>PATH</code>. This would not be
-    convenient because you will not run <code>max_diff_nc</code> directly.</p>
-</li>
-<li>
-<p>In the script <code>max_diff_nc.sh</code>, locate the line:</p>
-<pre><code>max_diff_nc=@CMAKE_INSTALL_FULL_LIBEXECDIR@/max_diff_nc
-</code></pre>
-<p>Replace <code>@CMAKE_INSTALL_FULL_LIBEXECDIR@</code> by the <em>absolute</em> path
-to the executable binary file <code>max_diff_nc</code>. For example:</p>
-<pre><code>max_diff_nc=~/.local/libexec/max_diff_nc
-</code></pre>
-</li>
-<li>
-<p>It is convenient to save the script <code>max_diff_nc_in.sh</code> to somewhere
-    in your <code>PATH</code>, renaming it to <code>max_diff_nc.sh</code>.</p>
-</li>
-</ol>
-<p><code>max_diff_nc</code> and <code>max_diff_nc.sh</code> are the only files you will need. So
-you can trash everything else if you want. (Be careful that if you type
-<code>make clean</code> in the top directory and <code>max_diff_nc</code> is still there then
-it will be deleted.)</p>
               
             </div>
           </div>
@@ -304,22 +243,19 @@ it will be deleted.)</p>
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/lguez/Max_diff_nc/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-      <span><a href="../other_utils/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/lguez/Max_diff_nc/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../other_utils/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
 </div>
     <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
     <script src="../js/theme.js" defer></script>
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" defer></script>
       <script src="../search/main.js" defer></script>
