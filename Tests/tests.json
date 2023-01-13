@@ -14,5 +14,13 @@
 	    "$install_dir/bin/max_diff_nc.sh", "$src_dir/Tests/test_group_1.nc",
 	    "$src_dir/Tests/test_group_2.nc"
 	]
+    },
+    {
+	"title": "Magnitude", "description": "Test option -m.",
+	"command":
+	[
+	    "$install_dir/bin/max_diff_nc.sh", "-m", "$src_dir/Tests/test_1.nc",
+	    "$src_dir/Tests/test_2.nc"
+	]
     }
 ]
