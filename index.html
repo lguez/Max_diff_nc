@@ -117,15 +117,16 @@
               
                 <h1 id="what-is-it">What is it?</h1>
 <p>This is a program which compares two
-<a href="http://www.unidata.ucar.edu/software/netcdf">NetCDF</a> files. Only NetCDF
-variables with type <code>NC_FLOAT</code> or <code>NC_DOUBLE</code> are compared. The program
-either compares variables with the same NetCDF ID (<code>varid</code>) or variables
-with the same name. Compared variables are assumed to have the same type
-and shape. For each such couple of variables, the program computes the
-maximum of the absolute value of the difference, and the maximum of the
-absolute value of the relative difference. The program also tells you at
-what location (the subscript list of the array) the maximum difference
-is reached.</p>
+<a href="http://www.unidata.ucar.edu/software/netcdf">NetCDF</a> files. Only
+NetCDF variables with type <code>NC_FLOAT</code> or <code>NC_DOUBLE</code> are compared. The
+program either compares variables with the same NetCDF ID (<code>varid</code>) or
+variables with the same name. Compared variables are assumed to have
+the same type and the program checks that they have the same
+shape. For each such couple of variables, the program computes the
+maximum of the absolute value of the difference, and the maximum of
+the absolute value of the relative difference. The program also tells
+you at what location (the subscript list of the array) the maximum
+difference is reached.</p>
 <p>Author: <a href="https://www.lmd.jussieu.fr/~lguez">Lionel GUEZ</a></p>
               
             </div>

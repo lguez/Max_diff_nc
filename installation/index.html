@@ -130,7 +130,7 @@ centers.</p>
 <ul>
 <li>
 <p><code>max_diff_nc</code> is written in Fortran (2003) and Bash so you need a
-Fortran 2003 compiler and Bash on your machine.</p>
+Fortran compiler and Bash on your machine.</p>
 </li>
 <li>
 <p>Install the library
@@ -139,7 +139,7 @@ with the same Fortran compiler than the one you want to use for
 <code>Max_diff_nc</code>.</p>
 </li>
 <li>
-<p><a href="https://cmake.org/download">CMake</a> (version ≥ 3.17).</p>
+<p><a href="https://cmake.org/download">CMake</a> (version ≥ 3.17)[^1].</p>
 </li>
 </ul>
 <h2 id="instructions">Instructions</h2>
@@ -163,8 +163,7 @@ cd build
 <li>
 <p>Choose the installation directory <code>CMAKE_INSTALL_PREFIX</code> and type
     the command below with your choice after <code>-DCMAKE_INSTALL_PREFIX=</code>
-    (enter an absolute path). For example, you could choose
-    <code>-DCMAKE_INSTALL_PREFIX=~/.local</code>. The installation process will
+    (enter an absolute path). The installation process will
     install a shell script, <code>max_diff_nc.sh</code>, in
     <code>$CMAKE_INSTALL_PREFIX/bin</code>. It is convenient for
     <code>$CMAKE_INSTALL_PREFIX/bin</code> to be in your <code>PATH</code> environment
@@ -178,12 +177,12 @@ cd build
 </code></pre>
 </li>
 </ol>
-<p>You do not need to keep the downloaded directory <code>Max_diff_nc</code> after
-installation. Note that the installation process also installs a
-Fortran executable file, <code>max_diff_nc</code>, in
+<p>You do not need to keep the downloaded directory <code>Max_diff_nc</code> (nor
+the build directory) after installation. Note that the installation
+process also installs a Fortran executable file, <code>max_diff_nc</code>, in
 <code>$CMAKE_INSTALL_PREFIX/libexec</code>. Do not remove this file.</p>
 <h2 id="advanced-instructions">Advanced instructions</h2>
-<ol>
+<ul>
 <li>
 <p>You can choose any name and any location for the build
    directory. You have to refer to the source directory when you run
@@ -201,7 +200,7 @@ cmake /where/I/downloaded/Max_diff_nc -DFETCH=ON -DCMAKE_INSTALL_PREFIX=~/.local
    you have already installed these libraries, you can omit the FETCH
    option.</p>
 </li>
-</ol>
+</ul>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>If your installation of NetCDF-Fortran is in a non-standard
 location, and CMake does not find it, then re-run cmake setting the
@@ -210,6 +209,9 @@ will then search <code>${CMAKE_PREFIX_PATH}/lib</code>,
 <code>${CMAKE_PREFIX_PATH}/include</code>, etc. For example:</p>
 <pre><code>cmake . -DCMAKE_PREFIX_PATH:PATH=/path/to/my/favorite/installation
 </code></pre>
+<p>[^1]: On Mac OS, after downloading the application from the CMake web
+    site, run it, then click on &ldquo;How to Install For Command Line Use&rdquo;
+    in the Tools menu.</p>
               
             </div>
           </div>

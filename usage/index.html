@@ -116,21 +116,28 @@
             <div class="section">
               
                 <h1 id="usage">Usage</h1>
-<p>If you type <code>max_diff_nc.sh</code> without argument, you will get a short
+<p>If you run <code>max_diff_nc.sh</code> with argument <code>-h</code>, you will get a short
 usage message:</p>
-<pre><code>$ max_diff_nc.sh 
-usage: max_diff_nc.sh [-s] [-m] [-i] [-q] [-v &lt;var&gt;] file file
+<pre><code>$ max_diff_nc.sh -h
+Usage: max_diff_nc.sh [OPTION]... file file-or-directory
+
+Compute and locate difference between NetCDF files.
+
+Options:
+   -h: this help message
    -s: report identical variables
    -m: compute average order of magnitude
    -i: compare variables with same varid, regardless of variable name
    -q: only report names of variables which differ, without maximum difference
-   -v &lt;var&gt;: only compare variable 
+   -v &lt;var&gt;: only compare variable with name &lt;var&gt;
 </code></pre>
-<p><code>max_diff_nc.sh</code> requires two arguments: the files to compare. The order
-of the files is important. The first file is taken as the reference file
-in order to compute relative differences. If you permute the files, the
-absolute differences will not change but, in general, the relative
-differences will change.</p>
+<p><code>max_diff_nc.sh</code> requires two arguments: the files to compare. If the
+second argument is a directory then <code>max_diff_nc.sh</code> will look in this
+directory for a file with the same basename as the first argument. The
+order of the files is important. The first file is taken as the
+reference file in order to compute relative differences. If you
+permute the files, the absolute differences will not change but, in
+general, the relative differences will change.</p>
 <p>Consider a particular variable name (or variable ID, for option <code>-i</code>).
 The program reads one array of values from each input file,
 corresponding to that variable name (or variable ID, for option <code>-i</code>).
