@@ -6,7 +6,7 @@ centers.
 ## Dependencies
 
 - `max_diff_nc` is written in Fortran (2003) and Bash so you need a
-Fortran 2003 compiler and Bash on your machine.
+Fortran compiler and Bash on your machine.
 
 - Install the library
 [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp),

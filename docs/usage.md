@@ -1,27 +1,30 @@
----
-date: Oct 28 2014
-title: Usage
----
+# Usage
 
-Usage
-===
-
-If you type `max_diff_nc.sh` without argument, you will get a short
+If you run `max_diff_nc.sh` with argument `-h`, you will get a short
 usage message:
+
 ```
-$ max_diff_nc.sh 
-usage: max_diff_nc.sh [-s] [-m] [-i] [-q] [-v <var>] file file
+$ max_diff_nc.sh -h
+Usage: max_diff_nc.sh [OPTION]... file file-or-directory
+
+Compute and locate difference between NetCDF files.
+
+Options:
+   -h: this help message
    -s: report identical variables
    -m: compute average order of magnitude
    -i: compare variables with same varid, regardless of variable name
    -q: only report names of variables which differ, without maximum difference
-   -v <var>: only compare variable 
+   -v <var>: only compare variable with name <var>
 ```
-`max_diff_nc.sh` requires two arguments: the files to compare. The order
-of the files is important. The first file is taken as the reference file
-in order to compute relative differences. If you permute the files, the
-absolute differences will not change but, in general, the relative
-differences will change.
+
+`max_diff_nc.sh` requires two arguments: the files to compare. If the
+second argument is a directory then `max_diff_nc.sh` will look in this
+directory for a file with the same basename as the first argument. The
+order of the files is important. The first file is taken as the
+reference file in order to compute relative differences. If you
+permute the files, the absolute differences will not change but, in
+general, the relative differences will change.
 
 Consider a particular variable name (or variable ID, for option `-i`).
 The program reads one array of values from each input file,
