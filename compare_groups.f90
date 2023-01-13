@@ -61,6 +61,7 @@ contains
     if (name1_in == "") then
        ! We want to compare all the variables
        call nf95_inquire(ncid1, nvariables = nvariables)
+       print '(/, "*************", /)'
        print *, "Found ", nvariables, " variable(s) in group ", group_name, &
             " in the first file."
        allocate(varid1(nvariables), varid2(nvariables), tag(nvariables))
@@ -107,7 +108,7 @@ contains
 
        test_dim: if (ndims == 0 .or. ndims >= 5) then
           print *
-          print *, "******************"
+          print *, "------------------"
           print *, trim(tag(i)) // ":"
           print *, "Rank not supported."
           print *, "ndims = ", ndims
@@ -222,7 +223,7 @@ contains
              end select double_select_ndims
           else test_type
              print *
-             print *, "******************"
+             print *, "------------------"
              print *, trim(tag(i)) // ":"
              print *, 'Not of type "nf95_float or "nf95_double".'
           end if test_type
