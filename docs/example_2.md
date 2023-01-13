@@ -1,10 +1,4 @@
----
-date: Sep 7 2011
-title: Example run with -m
----
-
-Example run with -m
-===
+# Example run with -m
 
 Here is an example illustrating the `-m` option. We examine the same two
 files as in the [example without `-m`](example_1.md).

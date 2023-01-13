@@ -1,8 +1,3 @@
----
-date: '2019-10-23'
-title: What is it?
----
-
 # What is it?
 
 This is a program which compares two

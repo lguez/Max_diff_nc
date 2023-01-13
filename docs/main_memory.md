@@ -1,5 +1,4 @@
-Main memory used
-================
+# Main memory used
 
 At run-time, `max_diff_nc` allocates main memory for each new NetCDF
 variable it compares, then deallocates memory when it finishes comparing

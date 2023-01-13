@@ -1,5 +1,4 @@
-Changes before version control
-==============================
+# Changes before version control
 
 (See [Github
 page](https://github.com/lguez/Max_diff_nc/commits/master) for more

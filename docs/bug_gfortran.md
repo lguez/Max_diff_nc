@@ -1,5 +1,4 @@
-Known bug of old Gfortran
-=========================
+# Known bug of old Gfortran
 
 There is a known problem in older versions of Gfortran, fixed in version
 `4.4.5` of Gfortran. The program `max_diff_nc` prints differences with

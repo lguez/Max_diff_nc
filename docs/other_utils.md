@@ -1,10 +1,8 @@
 ---
-date: Feb 20 2017
 title: Alternatives
 ---
 
-How does it compare with other similar utilities?
-===
+# How does it compare with other similar utilities?
 
 You can obtain similar information with other tools:
 [nccmp](https://gitlab.com/remikz/nccmp),
