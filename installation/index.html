@@ -75,13 +75,13 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Notes</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../French_centers/">French centers</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../French_centers/">Note for the users of French supercomputing centers</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../main_memory/">Main memory</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../main_memory/">Main memory used</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../changes/">Changes</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../changes/">Changes before version control</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../bug_gfortran/">Bug gfortran</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../bug_gfortran/">Known bug of old Gfortran</a>
                     </li>
                 </ul>
       </div>
@@ -139,7 +139,7 @@ with the same Fortran compiler than the one you want to use for
 <code>Max_diff_nc</code>.</p>
 </li>
 <li>
-<p><a href="https://cmake.org/download">CMake</a> (version ≥ 3.17)[^1].</p>
+<p><a href="https://cmake.org/download">CMake</a> (version ≥ 3.17)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
 </li>
 </ul>
 <h2 id="instructions">Instructions</h2>
@@ -209,9 +209,16 @@ will then search <code>${CMAKE_PREFIX_PATH}/lib</code>,
 <code>${CMAKE_PREFIX_PATH}/include</code>, etc. For example:</p>
 <pre><code>cmake . -DCMAKE_PREFIX_PATH:PATH=/path/to/my/favorite/installation
 </code></pre>
-<p>[^1]: On Mac OS, after downloading the application from the CMake web
-    site, run it, then click on &ldquo;How to Install For Command Line Use&rdquo;
-    in the Tools menu.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>On Mac OS, after downloading the application from the CMake web
+site, run it, then click on &ldquo;How to Install For Command Line Use&rdquo;
+in the Tools menu.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
               
             </div>
           </div>
