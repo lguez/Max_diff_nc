@@ -11,6 +11,7 @@ USAGE="Usage: `basename $0` [OPTION]... file file-or-directory
 Compute and locate difference between NetCDF files.
 
 Options:
+   -h: this help message
    -s: report identical variables
    -m: compute average order of magnitude
    -i: compare variables with same varid, regardless of variable name
@@ -26,7 +27,7 @@ comp_mag=False
 same_varid=False
 quiet=False
 
-while getopts smiqv: name
+while getopts smiqhv: name
   do
   case $name in
       s) report_id=True;;
@@ -34,6 +35,8 @@ while getopts smiqv: name
       i) same_varid=True;;
       q) quiet=True;;
       v) name1=$OPTARG;;
+      h) echo "$USAGE"
+	 exit;;
       \?) echo "$USAGE"
       exit 1;;
   esac
