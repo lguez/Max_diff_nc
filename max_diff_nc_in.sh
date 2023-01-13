@@ -1,29 +1,21 @@
 #!/usr/bin/bash
 
-# This is a script in Bash.
 # Author: Lionel GUEZ
 
-# This script is a wrapper for a Fortran program. It compares NetCDF
-# variables of type "NF90_FLOAT" or "NF90_DOUBLE" and of rank 1 to 4
-# in two files. The program computes the maximum of the absolute value
-# of the difference and the maximum of the absolute value of the
-# relative difference. The program either compares variables with the
-# same varid or variables with the same name, or a single variable
-# selected on the command line. Compared variables are assumed to have
-# the same type. The program checks that compared variables have the
-# same shape.
+# This script is a wrapper for a Fortran program. It may be necessary
+# to set up the environment with module (see at the end of the
+# script).
 
-# It may be necessary to set up the environment with module (see at
-# the end of the script).
+USAGE="Usage: `basename $0` [OPTION]... file file-or-directory
 
-# See notes.
+Compute and locate difference between NetCDF files.
 
-USAGE="usage: `basename $0` [-s] [-m] [-i] [-q] [-v <var>] file file-or-directory
+Options:
    -s: report identical variables
    -m: compute average order of magnitude
    -i: compare variables with same varid, regardless of variable name
    -q: only report names of variables which differ, without maximum difference
-   -v <var>: only compare variable <var>
+   -v <var>: only compare variable with name <var>
 
 For further documentation, see:
 https://lguez.github.io/Max_diff_nc"

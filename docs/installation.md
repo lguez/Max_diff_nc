@@ -13,7 +13,7 @@ Fortran 2003 compiler and Bash on your machine.
 with the same Fortran compiler than the one you want to use for
 `Max_diff_nc`.
 
-- [CMake](https://cmake.org/download) (version ≥ 3.17).
+- [CMake](https://cmake.org/download) (version ≥ 3.17)[^1].
 
 ## Instructions
 
@@ -34,8 +34,7 @@ with the same Fortran compiler than the one you want to use for
 
 3.  Choose the installation directory `CMAKE_INSTALL_PREFIX` and type
     the command below with your choice after `-DCMAKE_INSTALL_PREFIX=`
-    (enter an absolute path). For example, you could choose
-    `-DCMAKE_INSTALL_PREFIX=~/.local`. The installation process will
+    (enter an absolute path). The installation process will
     install a shell script, `max_diff_nc.sh`, in
     `$CMAKE_INSTALL_PREFIX/bin`. It is convenient for
     `$CMAKE_INSTALL_PREFIX/bin` to be in your `PATH` environment
@@ -47,14 +46,14 @@ with the same Fortran compiler than the one you want to use for
 
         make install
 
-You do not need to keep the downloaded directory `Max_diff_nc` after
-installation. Note that the installation process also installs a
-Fortran executable file, `max_diff_nc`, in
+You do not need to keep the downloaded directory `Max_diff_nc` (nor
+the build directory) after installation. Note that the installation
+process also installs a Fortran executable file, `max_diff_nc`, in
 `$CMAKE_INSTALL_PREFIX/libexec`. Do not remove this file.
 
 ## Advanced instructions
 
-1. You can choose any name and any location for the build
+- You can choose any name and any location for the build
    directory. You have to refer to the source directory when you run
    cmake from the build directory:
 
@@ -62,7 +61,7 @@ Fortran executable file, `max_diff_nc`, in
 		cd /wherever/any/name
 		cmake /where/I/downloaded/Max_diff_nc -DFETCH=ON -DCMAKE_INSTALL_PREFIX=~/.local
 
-2. The option `-DFETCH=ON` instructs CMake to download, compile and
+- The option `-DFETCH=ON` instructs CMake to download, compile and
    install the libraries [NetCDF95](https://lguez.github.io/NetCDF95)
    and
    [Jumble](https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html). If
@@ -78,3 +77,7 @@ will then search `${CMAKE_PREFIX_PATH}/lib`,
 `${CMAKE_PREFIX_PATH}/include`, etc. For example:
 
 	cmake . -DCMAKE_PREFIX_PATH:PATH=/path/to/my/favorite/installation
+
+[^1]: On Mac OS, after downloading the application from the CMake web
+    site, run it, then click on "How to Install For Command Line Use"
+    in the Tools menu.
