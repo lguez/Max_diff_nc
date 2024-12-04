@@ -129,17 +129,19 @@ centers.</p>
 <h2 id="dependencies">Dependencies</h2>
 <ul>
 <li>
-<p><code>max_diff_nc</code> is written in Fortran (2003) and Bash so you need a
-Fortran compiler and Bash on your machine.</p>
-</li>
-<li>
-<p>Install the library
-<a href="https://www.unidata.ucar.edu/downloads/netcdf/index.jsp">NetCDF-Fortran</a>,
-with the same Fortran compiler than the one you want to use for
-<code>Max_diff_nc</code>.</p>
-</li>
-<li>
 <p><a href="https://cmake.org/download">CMake</a> (version ≥ 3.17)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+</li>
+<li>
+<p>The <a href="https://docs.unidata.ucar.edu/nug/current/getting_and_building_netcdf.html">NetCDF C
+  library</a>.</p>
+</li>
+<li>
+<p>The <a href="https://www.unidata.ucar.edu/downloads/netcdf/index.jsp">NetCDF-Fortran
+  library</a>.</p>
+</li>
+<li>
+<p>The Fortran compiler that was used to compile your installed
+  NetCDF-Fortran library.</p>
 </li>
 </ul>
 <h2 id="instructions">Instructions</h2>
@@ -154,19 +156,20 @@ with the same Fortran compiler than the one you want to use for
 download the <a href="https://github.com/lguez/cmake">cmake subdirectory</a>.</p>
 </li>
 <li>
-<p>Create a build subdirectory in the directory you have just downloaded:</p>
-<pre><code>cd Max_diff_nc
+<p>Create a build subdirectory in the <code>Max_diff_nc</code> directory you
+    have just downloaded:</p>
+<pre><code>cd the-directory-you-have-just-downloaded
 mkdir build
 cd build
 </code></pre>
 </li>
 <li>
-<p>Choose the installation directory <code>CMAKE_INSTALL_PREFIX</code> and type
-    the command below with your choice after <code>-DCMAKE_INSTALL_PREFIX=</code>
-    (enter an absolute path). The installation process will
-    install a shell script, <code>max_diff_nc.sh</code>, in
-    <code>$CMAKE_INSTALL_PREFIX/bin</code>. It is convenient for
-    <code>$CMAKE_INSTALL_PREFIX/bin</code> to be in your <code>PATH</code> environment
+<p>Decide in which directory you want to install the program after
+    compilation and type the command below with your choice after
+    <code>-DCMAKE_INSTALL_PREFIX=</code> (enter an absolute path). The
+    installation process will install a shell script,
+    <code>max_diff_nc.sh</code>, in <code>$CMAKE_INSTALL_PREFIX/bin</code>. It is convenient
+    for <code>$CMAKE_INSTALL_PREFIX/bin</code> to be in your <code>PATH</code> environment
     variable. For example:</p>
 <pre><code>cmake .. -DFETCH=ON -DCMAKE_INSTALL_PREFIX=~/.local
 </code></pre>
@@ -185,8 +188,8 @@ process also installs a Fortran executable file, <code>max_diff_nc</code>, in
 <ul>
 <li>
 <p>You can choose any name and any location for the build
-   directory. You have to refer to the source directory when you run
-   cmake from the build directory:</p>
+  directory. You have to refer to the source directory when you run
+  cmake from the build directory:</p>
 <pre><code>mkdir /wherever/any/name
 cd /wherever/any/name
 cmake /where/I/downloaded/Max_diff_nc -DFETCH=ON -DCMAKE_INSTALL_PREFIX=~/.local
@@ -194,15 +197,15 @@ cmake /where/I/downloaded/Max_diff_nc -DFETCH=ON -DCMAKE_INSTALL_PREFIX=~/.local
 </li>
 <li>
 <p>The option <code>-DFETCH=ON</code> instructs CMake to download, compile and
-   install the libraries <a href="https://lguez.github.io/NetCDF95">NetCDF95</a>
-   and
-   <a href="https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html">Jumble</a>. If
-   you have already installed these libraries, you can omit the FETCH
-   option.</p>
+  install the libraries <a href="https://lguez.github.io/NetCDF95">NetCDF95</a>
+  and
+  <a href="https://www.lmd.jussieu.fr/~lguez/Jumble_site/index.html">Jumble</a>. If
+  you have already installed these libraries, you can omit the FETCH
+  option.</p>
 </li>
 </ul>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>If your installation of NetCDF-Fortran is in a non-standard
+<p>If your installation of NetCDF or NetCDF-Fortran is in a non-standard
 location, and CMake does not find it, then re-run cmake setting the
 variable <code>CMAKE_PREFIX_PATH</code> to the directory containing it. CMake
 will then search <code>${CMAKE_PREFIX_PATH}/lib</code>,
